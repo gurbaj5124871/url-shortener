@@ -1,0 +1,4 @@
+{
+  "makefile.extensionOutputFolder": "./.vscode",
+  "cSpell.words": ["mapstructure", "Msgf", "unmarshalling", "zerolog"]
+}
