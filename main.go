@@ -9,6 +9,7 @@ import (
 	"os/signal"
 
 	"github.com/gurbaj5124871/url-shortener/config"
+	"github.com/gurbaj5124871/url-shortener/src/db"
 	grpcLogger "github.com/philip-bui/grpc-zerolog"
 	"github.com/rs/zerolog"
 	logger "github.com/rs/zerolog/log"
@@ -34,6 +35,8 @@ func main() {
 	if err != nil {
 		log.Fatal().Err(err).Msg("Error while initiating server")
 	}
+
+	db.IgniteConnect()
 
 	// Serve gRPC
 	s := grpc.NewServer(

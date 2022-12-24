@@ -15,8 +15,17 @@ type Server struct {
 	Port string `mapstructure:"port"`
 }
 
+type Ignite struct {
+	Host     string `mapstructure:"host"`
+	Post     int    `mapstructure:"port"`
+	Username string `mapstructure:"username"`
+	Password string `mapstructure:"password"`
+	TLS      bool   `mapstructure:"tls"`
+}
+
 type Config struct {
 	Server Server
+	Ignite Ignite
 }
 
 var config *Config

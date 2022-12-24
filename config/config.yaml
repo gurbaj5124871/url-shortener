@@ -1,2 +1,8 @@
 server:
   port: :9090
+ignite:
+  host: "localhost"
+  port: 10800
+  username: "ignite"
+  password: "ignite"
+  tls: false
