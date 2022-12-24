@@ -1,0 +1,12 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/gurbaj5124871/url-shortener/src/proto
+plugins:
+  - remote: buf.build/protocolbuffers/plugins/go:v1.28.0-1
+    out: src/proto
+    opt: paths=source_relative
+  - remote: buf.build/grpc/plugins/go:v1.2.0-1
+    out: src/proto
+    opt: paths=source_relative,require_unimplemented_servers=false

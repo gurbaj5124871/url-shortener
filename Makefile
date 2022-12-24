@@ -1,8 +1,16 @@
 NAME=github.com/gurbaj5124871/url-shortener
 VERSION=0.0.1
+BUF_VERSION:=v1.9.0
 export HOST_IP := $(shell ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $$2 }' | cut -f2 -d: | head -n1)
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
+generate: generate/proto
+generate/proto:
+	go run github.com/bufbuild/buf/cmd/buf@$(BUF_VERSION) generate
+
+lint:
+	go run github.com/bufbuild/buf/cmd/buf@$(BUF_VERSION) lint
+	go run github.com/bufbuild/buf/cmd/buf@$(BUF_VERSION) breaking --against 'https://github.com/gurbaj5124871/url-shortener.git#branch=master'
 
 .PHONY: build
 ## build: Compile the packages.

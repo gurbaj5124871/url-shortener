@@ -17,13 +17,12 @@ func IgniteConnect() ignite.Client {
 	conf := config.GetConfig()
 
 	opts := ignite.ConnInfo{
-		Network: "tcp",
-		Host:    conf.Ignite.Host,
-		Port:    conf.Ignite.Post,
-		Major:   1,
-		Minor:   1,
-		Patch:   0,
-		// // Credentials are only needed if they're configured in your Ignite server.
+		Network:  "tcp",
+		Host:     conf.Ignite.Host,
+		Port:     conf.Ignite.Post,
+		Major:    1,
+		Minor:    1,
+		Patch:    0,
 		Username: conf.Ignite.Username,
 		Password: conf.Ignite.Password,
 		Dialer: net.Dialer{
@@ -42,6 +41,8 @@ func IgniteConnect() ignite.Client {
 		log.Fatal().Err(err).Msg("Failed to connect to ignite")
 	}
 	defer c.Close()
+
+	log.Info().Msg("Apache Ignite connected")
 
 	return c
 }

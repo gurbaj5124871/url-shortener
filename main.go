@@ -10,6 +10,8 @@ import (
 
 	"github.com/gurbaj5124871/url-shortener/config"
 	"github.com/gurbaj5124871/url-shortener/src/db"
+	urlShortener "github.com/gurbaj5124871/url-shortener/src/proto/url_shortener"
+	UrlShortenerGrpcHandler "github.com/gurbaj5124871/url-shortener/src/url_shortener"
 	grpcLogger "github.com/philip-bui/grpc-zerolog"
 	"github.com/rs/zerolog"
 	logger "github.com/rs/zerolog/log"
@@ -36,12 +38,17 @@ func main() {
 		log.Fatal().Err(err).Msg("Error while initiating server")
 	}
 
-	db.IgniteConnect()
+	// Connect to the database
+	ignite := db.IgniteConnect()
 
-	// Serve gRPC
+	// Init gRPC server and register rpc handlers
 	s := grpc.NewServer(
 		grpcLogger.UnaryInterceptorWithLogger(&log),
 	)
+	urlShortener.RegisterUrlShortenerServiceServer(s, &UrlShortenerGrpcHandler.UrlShortenerGrpcHandler{
+		Ignite: ignite,
+	})
+
 	ctx := context.Background()
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)

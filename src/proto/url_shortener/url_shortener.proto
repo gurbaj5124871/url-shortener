@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package url_shortener;
+
+service UrlShortenerService {
+    rpc CreateShortURL(CreateShortURLRequest) returns (CreateShortURLResponse) {};
+}
+
+message ShortUrlDTO {
+    string destination_url = 1;
+    string shortURL = 2;
+}
+
+message CreateShortURLRequest {
+    string destinationURL = 1;
+}
+
+message CreateShortURLResponse {
+    ShortUrlDTO URL = 1;
+}

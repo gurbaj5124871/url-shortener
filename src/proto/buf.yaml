@@ -1,0 +1,8 @@
+version: v1
+name: buf.build/gurbaj5124871/url-shortener
+lint:
+  use:
+    - DEFAULT
+  except:
+    - PACKAGE_VERSION_SUFFIX
+    - FIELD_LOWER_SNAKE_CASE
