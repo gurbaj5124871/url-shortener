@@ -14,7 +14,7 @@ type UrlShortenerGrpcHandler struct {
 func (grpc *UrlShortenerGrpcHandler) CreateShortURL(ctx context.Context, _ *urlShortener.CreateShortURLRequest) (*urlShortener.CreateShortURLResponse, error) {
 	return &urlShortener.CreateShortURLResponse{
 		URL: &urlShortener.ShortUrlDTO{
-			DestinationUrl: "",
+			DestinationURL: "",
 			ShortURL:       "",
 		},
 	}, nil
