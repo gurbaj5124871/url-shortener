@@ -4,6 +4,7 @@ package url_shortener;
 
 service UrlShortenerService {
     rpc CreateShortURL(CreateShortURLRequest) returns (CreateShortURLResponse) {};
+    rpc GetDestinationURLFromShortURL(GetDestinationURLFromShortURLRequest) returns (GetDestinationURLFromShortURLResponse) {};
 }
 
 message ShortUrlDTO {
@@ -18,4 +19,12 @@ message CreateShortURLRequest {
 
 message CreateShortURLResponse {
     ShortUrlDTO URL = 1;
+}
+
+message GetDestinationURLFromShortURLRequest {
+    string shortURL = 1;
+}
+
+message GetDestinationURLFromShortURLResponse {
+    string destinationURL = 1;
 }

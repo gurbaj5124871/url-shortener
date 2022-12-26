@@ -1,11 +1,13 @@
 package url_shortener
 
 import (
+	"errors"
 	"time"
 
 	ignite "github.com/amsokol/ignite-go-client/binary/v1"
 	"github.com/gurbaj5124871/url-shortener/src/db"
 	"github.com/gurbaj5124871/url-shortener/src/utils"
+	"github.com/rs/zerolog/log"
 )
 
 const (
@@ -51,4 +53,26 @@ func CreateShortURL(shortString string, destinationURL string) (*ShortURLS, erro
 	}
 
 	return &url, nil
+}
+
+func GetDestinationURLFromShortString(shortString string) (*string, error) {
+	sql := `SELECT DESTINATIONURL FROM ` + ShortURLSTable + ` WHERE SHORTSTRING = ? ORDER BY CREATEDAT ASC LIMIT 1;`
+	res, err := db.GetIgniteDB().QuerySQLFields(ShortURLSCache, false, ignite.QuerySQLFieldsData{
+		PageSize: 1,
+		Query:    sql,
+		QueryArgs: []interface{}{
+			shortString,
+		},
+	})
+	if err != nil {
+		log.Error().Err(err).Msg("")
+		return nil, err
+	}
+
+	if len(res.Rows) == 0 {
+		return nil, errors.New("short url not found")
+	}
+
+	destinationURL := res.Rows[0][0].(string)
+	return &destinationURL, nil
 }
