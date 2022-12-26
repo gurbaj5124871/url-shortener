@@ -1,4 +1,16 @@
 {
   "makefile.extensionOutputFolder": "./.vscode",
-  "cSpell.words": ["mapstructure", "Msgf", "unmarshalling", "zerolog"]
+  "cSpell.words": [
+    "CREATEDAT",
+    "DESTINATIONURL",
+    "mapstructure",
+    "Msgf",
+    "SHORTSTRING",
+    "SHORTURL",
+    "SHORTURLS",
+    "shorturlscachegroup",
+    "sonyflake",
+    "unmarshalling",
+    "zerolog"
+  ]
 }

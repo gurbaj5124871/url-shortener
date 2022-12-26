@@ -3,8 +3,8 @@ server:
   machine_id: 1
   domain: https://tiny.co/
 ignite:
-  host: "f6f0609b-72ac-4a26-83c6-f9d74929e986.gridgain-nebula.com"
+  host: "localhost"
   port: 10800
-  username: "gurbaj"
-  password: "D2ZRHnQIUeQEc9D"
-  tls: true
+  username: "ignite"
+  password: "ignite"
+  tls: false

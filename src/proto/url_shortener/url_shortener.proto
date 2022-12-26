@@ -9,6 +9,7 @@ service UrlShortenerService {
 message ShortUrlDTO {
     string destinationURL = 1;
     string shortURL = 2;
+    string createdAt = 3;
 }
 
 message CreateShortURLRequest {

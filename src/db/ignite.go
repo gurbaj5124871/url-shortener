@@ -12,6 +12,7 @@ import (
 )
 
 var log zerolog.Logger = logger.With().Str("logger", "db").Logger()
+var igniteDB ignite.Client
 
 func IgniteConnect() ignite.Client {
 	conf := config.GetConfig()
@@ -36,13 +37,21 @@ func IgniteConnect() ignite.Client {
 		}
 	}
 
-	c, err := ignite.Connect(opts)
+	conn, err := ignite.Connect(opts)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to connect to ignite")
 	}
-	defer c.Close()
+	igniteDB = conn
 
 	log.Info().Msg("Apache Ignite connected")
 
-	return c
+	return igniteDB
+}
+
+func GetIgniteDB() ignite.Client {
+	return igniteDB
+}
+
+func DisconnectIgniteDB() {
+	igniteDB.Close()
 }
