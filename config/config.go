@@ -12,7 +12,9 @@ import (
 var logger zerolog.Logger = log.With().Str("logger", "config").Logger()
 
 type Server struct {
-	Port string `mapstructure:"port"`
+	Port      string  `mapstructure:"port"`
+	MachineID *uint16 `mapstructure:"machine_id"`
+	Domain    string  `mapstructure:"domain"`
 }
 
 type Ignite struct {
