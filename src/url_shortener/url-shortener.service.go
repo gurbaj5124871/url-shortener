@@ -21,7 +21,7 @@ type ShortURLS struct {
 	CreatedAt      time.Time `json:"createdAt"`
 }
 
-func GenerateShortURL(url string) (*string, error) {
+func GenerateShortURL() (*string, error) {
 	id, err := utils.Snowflake.NextID()
 	if err != nil {
 		return nil, err

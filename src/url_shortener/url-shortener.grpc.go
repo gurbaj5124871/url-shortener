@@ -20,7 +20,7 @@ func (grpc *UrlShortenerGrpcHandler) CreateShortURL(
 ) (*urlShortener.CreateShortURLResponse, error) {
 	destinationURL := &req.DestinationURL
 
-	shortStr, err := GenerateShortURL(*destinationURL)
+	shortStr, err := GenerateShortURL()
 	if err != nil {
 		log.Err(err).Msgf("Failed to generate short url for %s", *destinationURL)
 		return nil, errors.New("failed to generate short url, try again sometime later")
